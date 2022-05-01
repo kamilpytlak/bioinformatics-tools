@@ -1,6 +1,10 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+from apps import home, sequence_summary
+
+MAIN_INFO = open('assets/info/main_info.md').read()
+
 
 def main():
     # Sidebar menu
@@ -16,6 +20,13 @@ def main():
             default_index=0,
             menu_icon='tools'
         )
+
+    st.sidebar.info(MAIN_INFO)
+
+    if menu_option == 'Home':
+        home.app()
+    elif menu_option == "Sequence Summary":
+        sequence_summary.app()
 
 
 if __name__ == '__main__':

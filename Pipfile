@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 streamlit = "*"
-streamlit-option-menu = "*"
 biopython = "*"
+plotly = "*"
 scipy = "*"
-seaborn = "*"
+streamlit-option-menu = "*"
 
 [dev-packages]
 
