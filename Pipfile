@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 streamlit = "*"
 biopython = "*"
+pandas = "*"
 plotly = "*"
 scipy = "*"
 streamlit-option-menu = "*"
