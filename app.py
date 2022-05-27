@@ -8,7 +8,7 @@ from apps.sequence_upload import upload_file, process_file
 
 
 MAIN_INFO = open('assets/info/main_info.md').read()
-DATA_EXAMPLES = [f for f in os.listdir("data") if f.endswith(("fasta", "fa"))]
+DATA_EXAMPLES = [f for f in os.listdir("data") if f.endswith(("fasta", "fa", "txt"))]
 
 
 def main():
