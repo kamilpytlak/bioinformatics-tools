@@ -40,7 +40,7 @@ def app(dna_record):
         second_seq = st.selectbox('Select the second sequence', seqs)
         window = st.number_input(label='Enter the window value', value=10, step=1, min_value=5)
         ok_button_alignment = st.button(label='Generate dotplot', key='ok_button_alignment')
-        if all(first_seq,  second_seq,  window, ok_button_alignment):
+        if all((first_seq,  second_seq,  window, ok_button_alignment)):
             record1 = dna_record[first_seq]
             record2 = dna_record[second_seq]
             if len(record1) == 4 and len(record2) == 4:
