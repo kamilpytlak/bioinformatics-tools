@@ -7,7 +7,7 @@ from apps import home, sequence_summary, two_sequence_alignment
 from apps.sequence_upload import upload_file, process_file
 
 
-MAIN_INFO = open('assets/info/main_info.md').read()
+MAIN_INFO = open('assets/info/main-info.md').read()
 DATA_EXAMPLES = [f for f in os.listdir('data') if f.endswith(('fasta', 'fa', 'txt'))]
 
 

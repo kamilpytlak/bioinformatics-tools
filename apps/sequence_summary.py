@@ -8,8 +8,8 @@ from Bio.SeqUtils import GC
 
 import streamlit as st
 
-SEQUENCE_SUMMARY_INFO = open('assets/info/sequence_summary_info.md').read()
-SEQUENCE_SUMMARY_ICON = 'assets/images/summary_icon.png'
+SEQUENCE_SUMMARY_INFO = open('assets/info/sequence-summary-info.md').read()
+SEQUENCE_SUMMARY_ICON = 'assets/images/summary.png'
 
 
 def check_seq_dist(seq_count: pd.Series):
@@ -33,19 +33,23 @@ def summary(record):
     seq_name = record.name
     seq_len = len(seq)
     seq_freq = pd.DataFrame.from_dict(Counter(seq), orient='index').reset_index()
-    seq_freq.columns = ['Nucleotide', 'Count']
-    seq_freq['Frequency'] = (seq_freq['Count'] / seq_freq['Count'].sum()).round(2)
+    seq_freq.columns = ['Nucleotide/Amino acid', 'Count']
+    seq_freq['Frequency (in %)'] = (seq_freq['Count'] / seq_len * 100).round(2)
+    seq_freq['Exp. frequency (in %)'] = (100 / len(seq_freq))
+    seq_freq['Diff in frequencies'] = (seq_freq['Frequency (in %)'] - seq_freq['Exp. frequency (in %)']).round(2)
 
     st.write(f'**Record name:** {seq_name}')
 
-    st.write(f'**Overall record length:** {seq_len} nucleotides')
+    st.write(f'**Overall record length:** {seq_len} nucleotides/amino acids')
 
-    st.write(f'**Nucleotide distribution:**')
+    st.write(f'**Nucleotide/Amino acid distribution:**')
     fig_table = ff.create_table(seq_freq)
-    fig_dist = px.bar(seq_freq, x='Nucleotide', y='Count')
+    fig_dist = px.bar(seq_freq, x='Nucleotide/Amino acid', y='Count')
     st.plotly_chart(fig_table)
     st.plotly_chart(fig_dist)
-    st.write(f'**GC content:** {round(GC(seq), 2)}%')
+
+    st.write(f'**GC content:** {round(GC(seq), 3)}%')
+
     check_seq_dist(seq_freq['Count'])
 
     st.markdown('---')
@@ -62,6 +66,7 @@ def app(dna_record):
         seq_names = st.multiselect('Select one or more sequences for analysis', dna_record.keys())
         for seq_name in seq_names:
             record = dna_record[seq_name]
-            summary(record)
+            with st.expander(f'{seq_name}'):
+                summary(record)
     else:
         st.error('No cached data. Upload a file.')

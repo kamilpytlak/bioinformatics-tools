@@ -1,5 +1,4 @@
 import plotly.express as px
-import pandas as pd
 import streamlit as st
 
 
@@ -43,10 +42,12 @@ def app(dna_record):
         if all((first_seq,  second_seq,  window, ok_button_alignment)):
             record1 = dna_record[first_seq]
             record2 = dna_record[second_seq]
-            if len(record1) == 4 and len(record2) == 4:
+            dna_valid = set('ACTG')
+            dna_sample = set(record1 + record2)
+            if dna_sample.issubset(dna_valid):
                 create_dotplot(record1, record2, window=window)
             else:
-                st.write('''
+                st.error('''
                 The nucleotide sequence was not introduced.
                 Construction of a comparison matrix is not possible.
                 ''')
