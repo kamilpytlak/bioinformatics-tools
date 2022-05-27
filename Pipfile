@@ -10,6 +10,7 @@ pandas = "*"
 plotly = "*"
 scipy = "*"
 streamlit-option-menu = "*"
+typing-extensions = "*"
 
 [dev-packages]
 
