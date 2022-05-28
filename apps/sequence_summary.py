@@ -19,12 +19,12 @@ def check_seq_dist(seq_count: pd.Series):
     if p_value > 0.05:
         st.write(rf'''
         No basis for rejecting the hypothesis of sequence homogeneity
-        ($\chi^2_{df} \approx {chi_stat}; p \approx {p_value}$)
+        ($\chi^2({df}) \approx {chi_stat}; p \approx {p_value}$)
         ''')
     else:
         st.write(rf'''
         The sequence is not homogeneous
-        ($\chi^2_{df} \approx {chi_stat}; p \approx {p_value}$)
+        ($\chi^2({df}) \approx {chi_stat}; p \approx {p_value}$)
         ''')
 
 
