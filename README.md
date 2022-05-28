@@ -1,5 +1,4 @@
 # Bioinformatics Tools (BioT)
-The app created with Python to predict person's heart health condition based on well-trained machine learning model (logistic regression).
 
 <p align="center">
   <img src="https://i.imgur.com/fP0SQMW.png" />
