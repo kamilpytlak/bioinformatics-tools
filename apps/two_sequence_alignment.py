@@ -3,6 +3,14 @@ import streamlit as st
 
 
 def create_dotplot(record1, record2, window):
+    """
+    Constructs a comparison matrix of the two nucleotide sequences.
+
+    :param record1: 1. nucleotide sequence
+    :param record2: 2. nucleotide sequence
+    :param window: window size
+    :return: comparison matrix (dotplot) of the two sequences record1 and record2
+    """
     dict_one, dict_two = {}, {}
     for (seq, section_dict) in [
         (str(record1.seq), dict_one),
@@ -33,6 +41,11 @@ def create_dotplot(record1, record2, window):
 
 
 def app(dna_record):
+    """
+    The main executive function of the tool "Two Sequence Alignment"
+
+    :param dna_record: sequence file saved as FASTA
+    """
     if dna_record:
         seqs = dna_record.keys()
         first_seq = st.selectbox('Select the first sequence', seqs)
@@ -44,6 +57,7 @@ def app(dna_record):
             record2 = dna_record[second_seq]
             dna_valid = set('ACTG')
             dna_sample = set(record1 + record2)
+            # Matrix construction if nucleotide sequences are provided
             if dna_sample.issubset(dna_valid):
                 create_dotplot(record1, record2, window=window)
             else:

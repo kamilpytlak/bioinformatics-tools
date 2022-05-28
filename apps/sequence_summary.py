@@ -13,6 +13,11 @@ SEQUENCE_SUMMARY_ICON = 'assets/images/summary.png'
 
 
 def check_seq_dist(seq_count: pd.Series):
+    """
+    Performs a chi-square test of homogeneity
+
+    :param seq_count: pandas Series object with counts
+    """
     df = len(seq_count) - 1
     chi_stat, p_value = chisquare(seq_count)
     chi_stat, p_value = chi_stat.round(2), p_value.round(2)
@@ -29,8 +34,12 @@ def check_seq_dist(seq_count: pd.Series):
 
 
 def summary(record):
-    seq = record.seq
-    seq_name = record.name
+    """
+    Performs descriptive analysis of a record (sequence)
+
+    :param record: nucleotide/amino acid sequence object
+    """
+    seq, seq_name = record.seq, record.name
     seq_len = len(seq)
     seq_freq = pd.DataFrame.from_dict(Counter(seq), orient='index').reset_index()
     seq_freq.columns = ['Nucleotide/Amino acid', 'Count']
@@ -56,6 +65,11 @@ def summary(record):
 
 
 def app(dna_record):
+    """
+    The main executive function of the tool "Sequence Summary"
+
+    :param dna_record: sequence file saved as FASTA
+    """
     col_image, col_text = st.columns([1, 3])
     with col_image:
         st.image(SEQUENCE_SUMMARY_ICON)

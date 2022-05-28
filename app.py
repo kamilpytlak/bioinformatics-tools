@@ -12,6 +12,9 @@ DATA_EXAMPLES = [f for f in os.listdir('data') if f.endswith(('fasta', 'fa', 'tx
 
 
 def main():
+    """
+    The main function of the application that manages tools.
+    """
     # Sidebar menu
     with st.sidebar:
         menu_option = option_menu(
@@ -26,12 +29,14 @@ def main():
             menu_icon='tools'
         )
 
+        # Tools for uploading a file and selecting a sample
         uploaded_seq = st.file_uploader('Upload a FASTA file', type=['fasta', 'fa', 'txt'])
         ok_button_file = st.button(label='Upload a file', key='ok_button_file')
         example_file = st.selectbox(label='Or choose an example', key='example_files',
                                     options=DATA_EXAMPLES)
         ok_button_example = st.button(label='Upload an example file', key='ok_button_example')
 
+        # Capture uploaded/selected file to cache
         if ok_button_file and uploaded_seq:
             dna_record = upload_file(file_or_path=uploaded_seq, is_uploaded=True)
             process_file(uploaded_seq, dna_record)
@@ -53,6 +58,7 @@ def main():
 
     dna_record = st.session_state['file_cached']
 
+    # Functionality selection
     if menu_option == 'Home':
         home.app()
     elif menu_option == 'Sequence Summary':

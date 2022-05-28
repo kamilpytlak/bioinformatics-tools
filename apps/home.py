@@ -6,6 +6,9 @@ HOME_INFO = open('assets/info/home-info.md').read()
 
 
 def app():
+    """
+    The main executive function of the application homepage
+    """
     col_image, col_text = st.columns([1, 3])
     with col_image:
         st.image(BIOINF_IMG)
