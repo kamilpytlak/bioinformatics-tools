@@ -1,6 +1,9 @@
 import plotly.express as px
 import streamlit as st
 
+ALIGNMENT_INFO = open('assets/info/two-sequence-alignment-info.md').read()
+ALIGNMENT_ICON = 'assets/images/alignment.png'
+
 
 def create_dotplot(record1, record2, window):
     """
@@ -46,6 +49,12 @@ def app(dna_record):
 
     :param dna_record: sequence file saved as FASTA
     """
+    col_image, col_text = st.columns([1, 3])
+    with col_image:
+        st.image(ALIGNMENT_ICON)
+    with col_text:
+        st.write(ALIGNMENT_INFO)
+
     if dna_record:
         seqs = dna_record.keys()
         first_seq = st.selectbox('Select the first sequence', seqs)
