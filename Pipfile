@@ -4,6 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+streamlit = "*"
+pipenv = "*"
+install = "*"
+pandas = "*"
+streamlit-option-menu = "*"
+scipy = "*"
+plotly = "*"
+biopython = "*"
 
 [dev-packages]
 
